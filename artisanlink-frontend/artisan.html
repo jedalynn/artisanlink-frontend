@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ArtisanLink — Artisan dashboard</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="logo" href="index.html">Artisan<span>Link</span></a>
+    <div class="who hidden" id="whoBox"><span id="whoName"></span><button id="signOut">Sign out</button></div>
+  </header>
+
+  <main>
+    <!-- Register / sign in -->
+    <section id="regView" class="card hidden">
+      <div class="tabs" role="tablist">
+        <button class="active" data-mode="register">Register</button>
+        <button data-mode="login">I already registered</button>
+      </div>
+
+      <form id="regForm" novalidate>
+        <div id="regFields">
+          <label for="aName">Full name</label>
+          <input id="aName" autocomplete="name">
+          <div class="row">
+            <div><label for="aTrade">Trade</label><select id="aTrade"></select></div>
+            <div><label for="aArea">Area you work in</label><select id="aArea"></select></div>
+          </div>
+        </div>
+        <label for="aPhone">Phone number</label>
+        <input id="aPhone" type="tel" inputmode="tel" placeholder="024 123 4567" autocomplete="tel">
+
+        <div class="consent" id="aConsentBox">
+          <input type="checkbox" id="aConsent">
+          <label for="aConsent" style="margin:0;font-weight:400">
+            I agree that ArtisanLink shows my name, trade, area and rating to customers, and shares my phone number
+            only with customers whose requests I accept. Data is stored in AWS Africa (Cape Town).
+          </label>
+        </div>
+        <button class="btn block" type="submit" id="regBtn">Create my profile</button>
+      </form>
+    </section>
+
+    <!-- Dashboard -->
+    <section id="dashView" class="hidden">
+      <div class="card">
+        <div class="toggle-wrap">
+          <div>
+            <h2 style="margin:0" id="profName"></h2>
+            <div class="hint" id="profMeta"></div>
+          </div>
+          <div style="text-align:right">
+            <label class="switch" title="Go online / offline">
+              <input type="checkbox" id="onlineToggle" aria-label="Online status">
+              <span class="slider"></span>
+            </label>
+            <div><span class="badge" id="statusBadge"></span></div>
+          </div>
+        </div>
+        <p class="hint" id="statusHint" style="margin-top:.6rem"></p>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button class="active" data-tab="incoming">Incoming <span id="incomingCount"></span></button>
+        <button data-tab="active">Active jobs</button>
+        <button data-tab="history">History</button>
+      </div>
+      <div class="card"><div id="jobList"></div></div>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/artisan.js"></script>
+</body>
+</html>

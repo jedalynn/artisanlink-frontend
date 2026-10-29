@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ArtisanLink — Find an artisan near you</title>
+  <meta name="description" content="Request an available plumber, electrician, tailor or other artisan near you. No app to install.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="logo" href="index.html">Artisan<span>Link</span></a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Find an artisan near you</h1>
+      <p>Choose a trade, see who is available right now, and send a request. No app to install, it all runs in your browser.</p>
+    </section>
+
+    <div class="role-grid">
+      <a class="card role-card" href="customer.html">
+        <div class="icon" aria-hidden="true">🔎</div>
+        <h2>I need an artisan</h2>
+        <ol class="steps">
+          <li>Sign in with your name and phone</li>
+          <li>Choose a service and describe the job</li>
+          <li>Pick an available artisan nearby</li>
+          <li>Get a response, then rate the job</li>
+        </ol>
+        <span class="btn block">Request an artisan</span>
+      </a>
+
+      <a class="card role-card" href="artisan.html">
+        <div class="icon" aria-hidden="true">🛠️</div>
+        <h2>I am an artisan</h2>
+        <ol class="steps">
+          <li>Register your trade, area and contact</li>
+          <li>Go online when you are free</li>
+          <li>Accept or decline requests</li>
+          <li>Complete jobs and track your history</li>
+        </ol>
+        <span class="btn ghost block">Go to artisan dashboard</span>
+      </a>
+    </div>
+
+    <div class="card">
+      <h3>Popular trades</h3>
+      <div class="chips" id="tradeChips"></div>
+    </div>
+  </main>
+
+  <footer>
+    ArtisanLink · Cloud Computing course project · Hosted on AWS (af-south-1)
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/api.js"></script>
+  <script>
+    showModeBanner();
+    $("#tradeChips").innerHTML = CONFIG.TRADES.map(
+      (t) => `<a class="chip" href="customer.html?trade=${encodeURIComponent(t)}">${esc(t)}</a>`
+    ).join("");
+  </script>
+</body>
+</html>

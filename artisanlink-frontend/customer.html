@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ArtisanLink — Request an artisan</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="logo" href="index.html">Artisan<span>Link</span></a>
+    <div class="who hidden" id="whoBox"><span id="whoName"></span><button id="signOut">Sign out</button></div>
+  </header>
+
+  <main>
+    <!-- 1. Sign in -->
+    <section id="signInView" class="card hidden">
+      <h2>Sign in</h2>
+      <p class="hint">We only ask for what we need to connect you with an artisan.</p>
+      <form id="signInForm" novalidate>
+        <label for="cName">Your name</label>
+        <input id="cName" autocomplete="name" required>
+        <label for="cPhone">Phone number</label>
+        <input id="cPhone" type="tel" inputmode="tel" placeholder="024 123 4567" autocomplete="tel" required>
+        <div class="consent">
+          <input type="checkbox" id="cConsent" required>
+          <label for="cConsent" style="margin:0;font-weight:400">
+            I agree that ArtisanLink stores my name, phone and job details to process my request. Data is stored in
+            AWS Africa (Cape Town); map distance lookups use coordinates only. I can ask to view, correct or delete my data.
+          </label>
+        </div>
+        <button class="btn block" type="submit">Continue</button>
+      </form>
+    </section>
+
+    <!-- 2. App -->
+    <section id="appView" class="hidden">
+      <div class="tabs" role="tablist">
+        <button class="active" data-tab="newTab" role="tab">New request</button>
+        <button data-tab="myTab" role="tab">My requests <span id="pendingCount"></span></button>
+      </div>
+
+      <!-- New request -->
+      <div id="newTab">
+        <div class="stepper" aria-hidden="true"><div id="st1" class="on"></div><div id="st2"></div><div id="st3"></div></div>
+
+        <div class="card" id="stepJob">
+          <h2>What do you need?</h2>
+          <label>Service</label>
+          <div class="chips" id="tradePicker"></div>
+
+          <label for="jobDesc">Describe the job</label>
+          <textarea id="jobDesc" maxlength="500" placeholder="e.g. Kitchen sink is leaking under the cabinet"></textarea>
+
+          <div class="row">
+            <div>
+              <label for="jobArea">Your area</label>
+              <select id="jobArea"></select>
+            </div>
+            <div>
+              <label for="jobUrgency">Urgency</label>
+              <select id="jobUrgency">
+                <option value="normal">Within a few days</option>
+                <option value="today">Today</option>
+                <option value="urgent">Urgent (now)</option>
+              </select>
+            </div>
+          </div>
+          <label for="jobAddress">Landmark / address</label>
+          <input id="jobAddress" maxlength="150" placeholder="e.g. Behind Osu Castle, blue gate">
+          <button class="btn ghost small" type="button" id="useGps" style="margin-top:.6rem">📍 Use my current location</button>
+          <div class="hint" id="gpsStatus"></div>
+
+          <button class="btn block" id="findBtn">Find available artisans</button>
+        </div>
+
+        <div class="card hidden" id="stepPick">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:.5rem">
+            <h2 id="pickTitle" style="margin:0">Nearby artisans</h2>
+            <button class="btn ghost small" id="backToJob">Edit job</button>
+          </div>
+          <p class="hint" id="pickSummary"></p>
+          <div id="artisanList"></div>
+        </div>
+
+        <div class="card hidden" id="stepSent">
+          <h2>Request sent ✅</h2>
+          <p id="sentText"></p>
+          <p class="hint">You'll see the artisan's response under <b>My requests</b>. The page checks for updates automatically.</p>
+          <div class="btn-row">
+            <button class="btn" id="goMy">View my requests</button>
+            <button class="btn ghost" id="newAgain">New request</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- My requests -->
+      <div id="myTab" class="hidden">
+        <div class="card"><div id="myList"></div></div>
+      </div>
+    </section>
+
+    <!-- Rating dialog -->
+    <section id="rateView" class="card hidden" aria-live="polite">
+      <h2>Rate <span id="rateName"></span></h2>
+      <div class="stars" id="stars"></div>
+      <label for="rateComment">Comment (optional)</label>
+      <textarea id="rateComment" maxlength="300"></textarea>
+      <div class="btn-row">
+        <button class="btn" id="rateSubmit">Submit rating</button>
+        <button class="btn ghost" id="rateCancel">Cancel</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/customer.js"></script>
+</body>
+</html>
